@@ -1,0 +1,18 @@
+{
+    "DESIGN_NAME": "silicluster_top",
+    "VERILOG_FILES": [
+        "dir::src/freq_counter.v",
+        "dir::src/health_test.v",
+        "dir::src/puf_id.v",
+        "dir::src/ring_osc.v",
+        "dir::src/ro_bank.v",
+        "dir::src/silicluster_top.v",
+        "dir::src/trng.v"
+    ],
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 100.0,
+    "FP_SIZING": "absolute",
+    "DIE_AREA": "0 0 180 115",
+    "PDK": "sky130A", "RUN_LINTER": false
+}
+
