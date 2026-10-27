@@ -1,5 +1,5 @@
 module health_test #(
-  parameter C = 5,
+  parameter C = 21,
   parameter W = 64,
   parameter APT_MAX = 46
 )(

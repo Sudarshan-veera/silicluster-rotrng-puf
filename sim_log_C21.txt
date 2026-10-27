@@ -1,0 +1,7 @@
+VCD info: dumpfile tb.vcd opened for output.
+ID = a6 (expect a6)
+Freq count = 64
+TRNG word = 6db43f19
+Health fail count = 0
+PUF response = 00
+tb/tb.v:51: $finish called at 4587010000 (1ps)

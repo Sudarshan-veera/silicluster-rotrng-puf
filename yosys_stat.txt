@@ -1,0 +1,2237 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `read_verilog src/*.v; synth -top silicluster_top; stat' --
+
+1. Executing Verilog-2005 frontend: src/freq_counter.v
+Parsing Verilog input from `src/freq_counter.v' to AST representation.
+Generating RTLIL representation for module `\freq_counter'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: src/health_test.v
+Parsing Verilog input from `src/health_test.v' to AST representation.
+Generating RTLIL representation for module `\health_test'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: src/puf_id.v
+Parsing Verilog input from `src/puf_id.v' to AST representation.
+Generating RTLIL representation for module `\puf_id'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: src/ring_osc.v
+Parsing Verilog input from `src/ring_osc.v' to AST representation.
+Generating RTLIL representation for module `\ring_osc'.
+Generating RTLIL representation for module `\ro_div'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: src/ro_bank.v
+Parsing Verilog input from `src/ro_bank.v' to AST representation.
+Generating RTLIL representation for module `\ro_bank'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: src/silicluster_top.v
+Parsing Verilog input from `src/silicluster_top.v' to AST representation.
+Generating RTLIL representation for module `\silicluster_top'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: src/trng.v
+Parsing Verilog input from `src/trng.v' to AST representation.
+Generating RTLIL representation for module `\trng'.
+Successfully finished Verilog frontend.
+
+8. Executing SYNTH pass.
+
+8.1. Executing HIERARCHY pass (managing design hierarchy).
+
+8.1.1. Analyzing design hierarchy..
+Top module:  \silicluster_top
+Used module:     \puf_id
+Used module:     \health_test
+Used module:     \trng
+Used module:     \freq_counter
+Used module:     \ro_div
+Used module:     \ro_bank
+Parameter \USE_RO = 0
+
+8.1.2. Executing AST frontend in derive mode using pre-parsed AST for module `\ro_bank'.
+Parameter \USE_RO = 0
+Generating RTLIL representation for module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+
+8.1.3. Analyzing design hierarchy..
+Top module:  \silicluster_top
+Used module:     \puf_id
+Used module:     \health_test
+Used module:     \trng
+Used module:     \freq_counter
+Used module:     \ro_div
+Used module:     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000
+
+8.1.4. Analyzing design hierarchy..
+Top module:  \silicluster_top
+Used module:     \puf_id
+Used module:     \health_test
+Used module:     \trng
+Used module:     \freq_counter
+Used module:     \ro_div
+Used module:     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000
+Removing unused module `\ro_bank'.
+Removing unused module `\ring_osc'.
+Removed 2 unused modules.
+Mapping positional arguments of cell silicluster_top.d3 (ro_div).
+Mapping positional arguments of cell silicluster_top.d2 (ro_div).
+Mapping positional arguments of cell silicluster_top.d1 (ro_div).
+Mapping positional arguments of cell silicluster_top.d0 (ro_div).
+
+8.2. Executing PROC pass (convert processes to netlists).
+
+8.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$src/silicluster_top.v:85$71 in module silicluster_top.
+Marked 1 switch rules as full_case in process $proc$src/silicluster_top.v:66$70 in module silicluster_top.
+Marked 1 switch rules as full_case in process $proc$src/silicluster_top.v:47$63 in module silicluster_top.
+Marked 1 switch rules as full_case in process $proc$src/ro_bank.v:12$94 in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Marked 1 switch rules as full_case in process $proc$src/ring_osc.v:24$51 in module ro_div.
+Marked 3 switch rules as full_case in process $proc$src/trng.v:15$85 in module trng.
+Marked 2 switch rules as full_case in process $proc$src/puf_id.v:16$37 in module puf_id.
+Marked 4 switch rules as full_case in process $proc$src/health_test.v:18$14 in module health_test.
+Marked 2 switch rules as full_case in process $proc$src/freq_counter.v:8$3 in module freq_counter.
+Removed a total of 0 dead cases.
+
+8.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 15 redundant assignments.
+Promoted 1 assignment to connection.
+
+8.2.4. Executing PROC_INIT pass (extract init attributes).
+
+8.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+Found async reset \rst_n in `\silicluster_top.$proc$src/silicluster_top.v:47$63'.
+Found async reset \rst_n in `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.$proc$src/ro_bank.v:12$94'.
+Found async reset \rst_n in `\ro_div.$proc$src/ring_osc.v:24$51'.
+Found async reset \rst_n in `\trng.$proc$src/trng.v:15$85'.
+Found async reset \rst_n in `\puf_id.$proc$src/puf_id.v:16$37'.
+Found async reset \rst_n in `\health_test.$proc$src/health_test.v:18$14'.
+Found async reset \rst_n in `\freq_counter.$proc$src/freq_counter.v:8$3'.
+
+8.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~29 debug messages>
+
+8.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+     1/13: $0\puf_sample[0:0]
+     2/13: $0\hack[0:0]
+     3/13: $0\ack[0:0]
+     4/13: $0\start[0:0]
+     5/13: $0\wr_pulse[0:0]
+     6/13: $0\miso_r[0:0]
+     7/13: $0\wdata[7:0]
+     8/13: $0\addr[7:0]
+     9/13: $0\sh_out[7:0]
+    10/13: $0\sh_in[7:0]
+    11/13: $0\trng_run[0:0]
+    12/13: $0\ro_en[0:0]
+    13/13: $0\bitcnt[4:0]
+Creating decoders for process `\silicluster_top.$proc$src/silicluster_top.v:66$70'.
+     1/1: $1\rd[7:0]
+Creating decoders for process `\silicluster_top.$proc$src/silicluster_top.v:47$63'.
+     1/3: $0\mosi_s[1:0]
+     2/3: $0\cs_s[2:0]
+     3/3: $0\sck_s[2:0]
+Creating decoders for process `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.$proc$src/ro_bank.v:12$94'.
+     1/1: $0\g_lfsr.l[15:0]
+Creating decoders for process `\ro_div.$proc$src/ring_osc.v:24$51'.
+     1/1: $0\cnt[6:0]
+Creating decoders for process `\trng.$proc$src/trng.v:15$85'.
+     1/10: $0\raw_v[0:0]
+     2/10: $0\tcnt[3:0]
+     3/10: $0\s2[0:0]
+     4/10: $0\s1[0:0]
+     5/10: $0\nbits[4:0]
+     6/10: $0\prev[0:0]
+     7/10: $0\bit_out[0:0]
+     8/10: $0\valid[0:0]
+     9/10: $0\word[31:0]
+    10/10: $0\have_prev[0:0]
+Creating decoders for process `\puf_id.$proc$src/puf_id.v:16$37'.
+     1/5: $0\samp_d[0:0]
+     2/5: $0\bitcnt[2:0]
+     3/5: $0\shreg[7:0]
+     4/5: $0\resp_valid[0:0]
+     5/5: $0\resp[7:0]
+Creating decoders for process `\health_test.$proc$src/health_test.v:18$14'.
+     1/9: $0\ones_cnt[6:0]
+     2/9: $0\win_cnt[6:0]
+     3/9: $0\rep_cnt[7:0]
+     4/9: $0\have_prev[0:0]
+     5/9: $0\prev_bit[0:0]
+     6/9: $0\discard_cnt[5:0]
+     7/9: $0\kept_cnt[5:0]
+     8/9: $0\fail_count[7:0]
+     9/9: $0\fail[0:0]
+Creating decoders for process `\freq_counter.$proc$src/freq_counter.v:8$3'.
+     1/5: $0\s[2:0]
+     2/5: $0\gate[14:0]
+     3/5: $0\done[0:0]
+     4/5: $0\busy[0:0]
+     5/5: $0\count[15:0]
+
+8.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\silicluster_top.\rd' from process `\silicluster_top.$proc$src/silicluster_top.v:66$70'.
+
+8.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\silicluster_top.\start' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$334' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\bitcnt' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$335' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\ro_en' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$336' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\ack' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$337' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\trng_run' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$338' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\hack' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$339' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\puf_sample' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$340' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\sh_in' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$341' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\sh_out' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$342' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\addr' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$343' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\wdata' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$344' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\wr_pulse' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$345' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\miso_r' using process `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+  created $adff cell `$procdff$346' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\sck_s' using process `\silicluster_top.$proc$src/silicluster_top.v:47$63'.
+  created $adff cell `$procdff$347' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\cs_s' using process `\silicluster_top.$proc$src/silicluster_top.v:47$63'.
+  created $adff cell `$procdff$348' with positive edge clock and negative level reset.
+Creating register for signal `\silicluster_top.\mosi_s' using process `\silicluster_top.$proc$src/silicluster_top.v:47$63'.
+  created $adff cell `$procdff$349' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.\g_lfsr.l' using process `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.$proc$src/ro_bank.v:12$94'.
+  created $adff cell `$procdff$350' with positive edge clock and negative level reset.
+Creating register for signal `\ro_div.\cnt' using process `\ro_div.$proc$src/ring_osc.v:24$51'.
+  created $adff cell `$procdff$351' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\have_prev' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$352' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\word' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$353' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\valid' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$354' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\bit_out' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$355' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\s1' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$356' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\s2' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$357' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\prev' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$358' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\tcnt' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$359' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\nbits' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$360' with positive edge clock and negative level reset.
+Creating register for signal `\trng.\raw_v' using process `\trng.$proc$src/trng.v:15$85'.
+  created $adff cell `$procdff$361' with positive edge clock and negative level reset.
+Creating register for signal `\puf_id.\resp' using process `\puf_id.$proc$src/puf_id.v:16$37'.
+  created $adff cell `$procdff$362' with positive edge clock and negative level reset.
+Creating register for signal `\puf_id.\resp_valid' using process `\puf_id.$proc$src/puf_id.v:16$37'.
+  created $adff cell `$procdff$363' with positive edge clock and negative level reset.
+Creating register for signal `\puf_id.\shreg' using process `\puf_id.$proc$src/puf_id.v:16$37'.
+  created $adff cell `$procdff$364' with positive edge clock and negative level reset.
+Creating register for signal `\puf_id.\bitcnt' using process `\puf_id.$proc$src/puf_id.v:16$37'.
+  created $adff cell `$procdff$365' with positive edge clock and negative level reset.
+Creating register for signal `\puf_id.\samp_d' using process `\puf_id.$proc$src/puf_id.v:16$37'.
+  created $adff cell `$procdff$366' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\fail' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$367' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\fail_count' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$368' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\kept_cnt' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$369' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\discard_cnt' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$370' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\prev_bit' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$371' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\have_prev' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$372' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\rep_cnt' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$373' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\win_cnt' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$374' with positive edge clock and negative level reset.
+Creating register for signal `\health_test.\ones_cnt' using process `\health_test.$proc$src/health_test.v:18$14'.
+  created $adff cell `$procdff$375' with positive edge clock and negative level reset.
+Creating register for signal `\freq_counter.\count' using process `\freq_counter.$proc$src/freq_counter.v:8$3'.
+  created $adff cell `$procdff$376' with positive edge clock and negative level reset.
+Creating register for signal `\freq_counter.\busy' using process `\freq_counter.$proc$src/freq_counter.v:8$3'.
+  created $adff cell `$procdff$377' with positive edge clock and negative level reset.
+Creating register for signal `\freq_counter.\done' using process `\freq_counter.$proc$src/freq_counter.v:8$3'.
+  created $adff cell `$procdff$378' with positive edge clock and negative level reset.
+Creating register for signal `\freq_counter.\s' using process `\freq_counter.$proc$src/freq_counter.v:8$3'.
+  created $adff cell `$procdff$379' with positive edge clock and negative level reset.
+Creating register for signal `\freq_counter.\gate' using process `\freq_counter.$proc$src/freq_counter.v:8$3'.
+  created $adff cell `$procdff$380' with positive edge clock and negative level reset.
+
+8.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\silicluster_top.$proc$src/silicluster_top.v:85$71'.
+Removing empty process `silicluster_top.$proc$src/silicluster_top.v:85$71'.
+Found and cleaned up 1 empty switch in `\silicluster_top.$proc$src/silicluster_top.v:66$70'.
+Removing empty process `silicluster_top.$proc$src/silicluster_top.v:66$70'.
+Removing empty process `silicluster_top.$proc$src/silicluster_top.v:47$63'.
+Found and cleaned up 1 empty switch in `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.$proc$src/ro_bank.v:12$94'.
+Removing empty process `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.$proc$src/ro_bank.v:12$94'.
+Removing empty process `ro_div.$proc$src/ring_osc.v:24$51'.
+Found and cleaned up 6 empty switches in `\trng.$proc$src/trng.v:15$85'.
+Removing empty process `trng.$proc$src/trng.v:15$85'.
+Found and cleaned up 2 empty switches in `\puf_id.$proc$src/puf_id.v:16$37'.
+Removing empty process `puf_id.$proc$src/puf_id.v:16$37'.
+Found and cleaned up 7 empty switches in `\health_test.$proc$src/health_test.v:18$14'.
+Removing empty process `health_test.$proc$src/health_test.v:18$14'.
+Found and cleaned up 4 empty switches in `\freq_counter.$proc$src/freq_counter.v:8$3'.
+Removing empty process `freq_counter.$proc$src/freq_counter.v:8$3'.
+Cleaned up 29 empty switches.
+
+8.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module silicluster_top.
+<suppressed ~3 debug messages>
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module ro_div.
+Optimizing module trng.
+<suppressed ~6 debug messages>
+Optimizing module puf_id.
+<suppressed ~1 debug messages>
+Optimizing module health_test.
+<suppressed ~3 debug messages>
+Optimizing module freq_counter.
+
+8.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module silicluster_top.
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module ro_div.
+Optimizing module trng.
+Optimizing module puf_id.
+Optimizing module health_test.
+Optimizing module freq_counter.
+
+8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \trng..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \freq_counter..
+Removed 11 unused cells and 164 unused wires.
+<suppressed ~19 debug messages>
+
+8.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000...
+Checking module freq_counter...
+Checking module health_test...
+Checking module puf_id...
+Checking module ro_div...
+Checking module silicluster_top...
+Checking module trng...
+Found and reported 0 problems.
+
+8.6. Executing OPT pass (performing simple optimizations).
+
+8.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 1 cells.
+
+8.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port A of cell $procmux$322: \busy -> 1'0
+      Replacing known input bits on port A of cell $procmux$320: \busy -> 1'1
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $procmux$286: \have_prev -> 1'1
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $procmux$219: \valid -> 1'1
+      Replacing known input bits on port A of cell $procmux$217: \valid -> 1'0
+      Replacing known input bits on port A of cell $procmux$215: \valid -> 1'0
+      Replacing known input bits on port A of cell $procmux$213: \valid -> 1'0
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~36 debug messages>
+
+8.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 1 changes.
+
+8.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+Handling D = Q on $procdff$370 ($adff) from module health_test (removing D path).
+Handling D = Q on $procdff$369 ($adff) from module health_test (removing D path).
+Setting constant 0-bit at position 0 on $procdff$369 ($dlatch) from module health_test.
+Setting constant 0-bit at position 1 on $procdff$369 ($dlatch) from module health_test.
+Setting constant 0-bit at position 2 on $procdff$369 ($dlatch) from module health_test.
+Setting constant 0-bit at position 3 on $procdff$369 ($dlatch) from module health_test.
+Setting constant 0-bit at position 4 on $procdff$369 ($dlatch) from module health_test.
+Setting constant 0-bit at position 5 on $procdff$369 ($dlatch) from module health_test.
+Setting constant 0-bit at position 0 on $procdff$370 ($dlatch) from module health_test.
+Setting constant 0-bit at position 1 on $procdff$370 ($dlatch) from module health_test.
+Setting constant 0-bit at position 2 on $procdff$370 ($dlatch) from module health_test.
+Setting constant 0-bit at position 3 on $procdff$370 ($dlatch) from module health_test.
+Setting constant 0-bit at position 4 on $procdff$370 ($dlatch) from module health_test.
+Setting constant 0-bit at position 5 on $procdff$370 ($dlatch) from module health_test.
+Setting constant 0-bit at position 0 on $procdff$337 ($adff) from module silicluster_top.
+
+8.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+8.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~36 debug messages>
+
+8.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.6.16. Finished OPT passes. (There is nothing left to do.)
+
+8.7. Executing FSM pass (extract and optimize FSM).
+
+8.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+8.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+8.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+8.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+8.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+8.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+8.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+8.8. Executing OPT pass (performing simple optimizations).
+
+8.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~36 debug messages>
+
+8.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$350 ($adff) from module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000 (D = { \g_lfsr.l [14:0] $xor$src/ro_bank.v:14$98_Y }, Q = \g_lfsr.l).
+Adding EN signal on $procdff$380 ($adff) from module freq_counter (D = $0\gate[14:0], Q = \gate).
+Adding EN signal on $procdff$378 ($adff) from module freq_counter (D = $0\done[0:0], Q = \done).
+Adding EN signal on $procdff$376 ($adff) from module freq_counter (D = $0\count[15:0], Q = \count).
+Adding EN signal on $procdff$375 ($adff) from module health_test (D = $procmux$268_Y, Q = \ones_cnt).
+Adding EN signal on $procdff$374 ($adff) from module health_test (D = $procmux$273_Y, Q = \win_cnt).
+Adding EN signal on $procdff$373 ($adff) from module health_test (D = $procmux$281_Y, Q = \rep_cnt).
+Adding EN signal on $procdff$372 ($adff) from module health_test (D = 1'1, Q = \have_prev).
+Adding EN signal on $procdff$371 ($adff) from module health_test (D = $procmux$294_Y, Q = \prev_bit).
+Adding EN signal on $procdff$368 ($adff) from module health_test (D = $add$src/health_test.v:41$24_Y, Q = \fail_count).
+Adding EN signal on $procdff$367 ($adff) from module health_test (D = 1'1, Q = \fail).
+Adding EN signal on $procdff$365 ($adff) from module puf_id (D = $procmux$249_Y, Q = \bitcnt).
+Adding EN signal on $procdff$364 ($adff) from module puf_id (D = { \shreg [6:0] \bit_now }, Q = \shreg).
+Adding EN signal on $procdff$363 ($adff) from module puf_id (D = $procmux$256_Y, Q = \resp_valid).
+Adding EN signal on $procdff$362 ($adff) from module puf_id (D = { \shreg [6:0] \bit_now }, Q = \resp).
+Adding EN signal on $procdff$346 ($adff) from module silicluster_top (D = $0\miso_r[0:0], Q = \miso_r).
+Adding EN signal on $procdff$344 ($adff) from module silicluster_top (D = { \sh_in [6:0] \mosi_s [1] }, Q = \wdata).
+Adding EN signal on $procdff$343 ($adff) from module silicluster_top (D = { \sh_in [6:0] \mosi_s [1] }, Q = \addr).
+Adding EN signal on $procdff$342 ($adff) from module silicluster_top (D = $procmux$135_Y, Q = \sh_out).
+Adding EN signal on $procdff$341 ($adff) from module silicluster_top (D = { \sh_in [6:0] \mosi_s [1] }, Q = \sh_in).
+Adding EN signal on $procdff$338 ($adff) from module silicluster_top (D = \wdata [3], Q = \trng_run).
+Adding EN signal on $procdff$336 ($adff) from module silicluster_top (D = \wdata [0], Q = \ro_en).
+Adding EN signal on $procdff$335 ($adff) from module silicluster_top (D = $0\bitcnt[4:0], Q = \bitcnt).
+Adding EN signal on $procdff$360 ($adff) from module trng (D = $0\nbits[4:0], Q = \nbits).
+Adding EN signal on $procdff$358 ($adff) from module trng (D = \s2, Q = \prev).
+Adding EN signal on $procdff$355 ($adff) from module trng (D = \prev, Q = \bit_out).
+Adding EN signal on $procdff$354 ($adff) from module trng (D = $0\valid[0:0], Q = \valid).
+Adding EN signal on $procdff$353 ($adff) from module trng (D = { \word [30:0] \prev }, Q = \word).
+Adding EN signal on $procdff$352 ($adff) from module trng (D = $0\have_prev[0:0], Q = \have_prev).
+
+8.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 41 unused cells and 41 unused wires.
+<suppressed ~46 debug messages>
+
+8.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+<suppressed ~3 debug messages>
+Optimizing module health_test.
+<suppressed ~1 debug messages>
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+<suppressed ~3 debug messages>
+Optimizing module trng.
+<suppressed ~3 debug messages>
+
+8.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+8.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\trng'.
+<suppressed ~24 debug messages>
+Removed a total of 13 cells.
+
+8.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 0 unused cells and 13 unused wires.
+<suppressed ~3 debug messages>
+
+8.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+8.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.8.23. Finished OPT passes. (There is nothing left to do.)
+
+8.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 15 bits (of 16) from port B of cell freq_counter.$add$src/freq_counter.v:16$7 ($add).
+Removed top 14 bits (of 15) from port B of cell freq_counter.$add$src/freq_counter.v:17$8 ($add).
+Removed top 2 bits (of 3) from port B of cell freq_counter.$auto$opt_dff.cc:195:make_patterns_logic$389 ($ne).
+Removed top 2 bits (of 3) from port B of cell freq_counter.$auto$opt_dff.cc:195:make_patterns_logic$396 ($ne).
+Removed top 27 bits (of 32) from port B of cell health_test.$ge$src/health_test.v:12$10 ($ge).
+Removed top 1 bits (of 7) from port B of cell health_test.$gt$src/health_test.v:16$12 ($gt).
+Removed top 7 bits (of 8) from port B of cell health_test.$add$src/health_test.v:27$18 ($add).
+Removed top 6 bits (of 7) from port B of cell health_test.$add$src/health_test.v:35$20 ($add).
+Removed top 6 bits (of 7) from port B of cell health_test.$add$src/health_test.v:36$21 ($add).
+Removed top 7 bits (of 8) from port B of cell health_test.$add$src/health_test.v:41$24 ($add).
+Removed top 1 bits (of 2) from port B of cell puf_id.$eq$src/puf_id.v:12$29 ($eq).
+Removed top 2 bits (of 3) from port B of cell puf_id.$add$src/puf_id.v:28$40 ($add).
+Removed top 1 bits (of 8) from FF cell puf_id.$auto$ff.cc:266:slice$419 ($adffe).
+Removed top 1 bits (of 8) from wire puf_id.shreg.
+Removed top 6 bits (of 7) from port B of cell ro_div.$add$src/ring_osc.v:25$53 ($add).
+Removed top 2 bits (of 3) from port B of cell silicluster_top.$auto$opt_dff.cc:195:make_patterns_logic$457 ($ne).
+Removed top 4 bits (of 5) from port B of cell silicluster_top.$add$src/silicluster_top.v:97$75 ($add).
+Removed top 2 bits (of 5) from port B of cell silicluster_top.$eq$src/silicluster_top.v:98$76 ($eq).
+Removed top 1 bits (of 5) from port B of cell silicluster_top.$eq$src/silicluster_top.v:99$77 ($eq).
+Removed top 1 bits (of 5) from port B of cell silicluster_top.$ge$src/silicluster_top.v:101$78 ($ge).
+Removed top 3 bits (of 7) from port B of cell silicluster_top.$eq$src/silicluster_top.v:112$82 ($eq).
+Removed top 3 bits (of 7) from port B of cell silicluster_top.$procmux$158_CMP0 ($eq).
+Removed top 3 bits (of 7) from port B of cell silicluster_top.$procmux$159_CMP0 ($eq).
+Removed top 3 bits (of 7) from port B of cell silicluster_top.$procmux$160_CMP0 ($eq).
+Removed top 3 bits (of 7) from port B of cell silicluster_top.$procmux$161_CMP0 ($eq).
+Removed top 3 bits (of 7) from port B of cell silicluster_top.$procmux$162_CMP0 ($eq).
+Removed top 4 bits (of 7) from port B of cell silicluster_top.$procmux$163_CMP0 ($eq).
+Removed top 4 bits (of 7) from port B of cell silicluster_top.$procmux$164_CMP0 ($eq).
+Removed top 4 bits (of 7) from port B of cell silicluster_top.$procmux$165_CMP0 ($eq).
+Removed top 4 bits (of 7) from port B of cell silicluster_top.$procmux$166_CMP0 ($eq).
+Removed top 5 bits (of 7) from port B of cell silicluster_top.$procmux$167_CMP0 ($eq).
+Removed top 5 bits (of 7) from port B of cell silicluster_top.$procmux$168_CMP0 ($eq).
+Removed top 6 bits (of 7) from port B of cell silicluster_top.$procmux$169_CMP0 ($eq).
+Removed top 2 bits (of 3) from port B of cell silicluster_top.$auto$opt_dff.cc:195:make_patterns_logic$441 ($ne).
+Removed top 1 bits (of 8) from FF cell silicluster_top.$auto$ff.cc:266:slice$446 ($adffe).
+Removed top 4 bits (of 8) from FF cell silicluster_top.$auto$ff.cc:266:slice$427 ($adffe).
+Removed top 1 bits (of 3) from FF cell silicluster_top.$procdff$348 ($adff).
+Removed top 1 bits (of 3) from wire silicluster_top.cs_s.
+Removed top 1 bits (of 8) from wire silicluster_top.sh_in.
+Removed top 4 bits (of 8) from wire silicluster_top.wdata.
+Removed top 3 bits (of 4) from port B of cell trng.$add$src/trng.v:21$88 ($add).
+Removed top 4 bits (of 5) from port B of cell trng.$add$src/trng.v:33$92 ($add).
+Removed top 1 bits (of 5) from port B of cell trng.$auto$opt_dff.cc:195:make_patterns_logic$464 ($ne).
+
+8.10. Executing PEEPOPT pass (run peephole optimizers).
+
+8.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~2 debug messages>
+
+8.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module freq_counter:
+  creating $macc model for $add$src/freq_counter.v:16$7 ($add).
+  creating $macc model for $add$src/freq_counter.v:17$8 ($add).
+  creating $alu model for $macc $add$src/freq_counter.v:17$8.
+  creating $alu model for $macc $add$src/freq_counter.v:16$7.
+  creating $alu cell for $add$src/freq_counter.v:16$7: $auto$alumacc.cc:485:replace_alu$508
+  creating $alu cell for $add$src/freq_counter.v:17$8: $auto$alumacc.cc:485:replace_alu$511
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module health_test:
+  creating $macc model for $add$src/health_test.v:27$18 ($add).
+  creating $macc model for $add$src/health_test.v:35$20 ($add).
+  creating $macc model for $add$src/health_test.v:36$21 ($add).
+  creating $macc model for $add$src/health_test.v:41$24 ($add).
+  creating $alu model for $macc $add$src/health_test.v:41$24.
+  creating $alu model for $macc $add$src/health_test.v:36$21.
+  creating $alu model for $macc $add$src/health_test.v:35$20.
+  creating $alu model for $macc $add$src/health_test.v:27$18.
+  creating $alu model for $ge$src/health_test.v:12$10 ($ge): new $alu
+  creating $alu model for $gt$src/health_test.v:16$12 ($gt): new $alu
+  creating $alu cell for $gt$src/health_test.v:16$12: $auto$alumacc.cc:485:replace_alu$516
+  creating $alu cell for $ge$src/health_test.v:12$10: $auto$alumacc.cc:485:replace_alu$521
+  creating $alu cell for $add$src/health_test.v:27$18: $auto$alumacc.cc:485:replace_alu$530
+  creating $alu cell for $add$src/health_test.v:35$20: $auto$alumacc.cc:485:replace_alu$533
+  creating $alu cell for $add$src/health_test.v:36$21: $auto$alumacc.cc:485:replace_alu$536
+  creating $alu cell for $add$src/health_test.v:41$24: $auto$alumacc.cc:485:replace_alu$539
+  created 6 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module puf_id:
+  creating $macc model for $add$src/puf_id.v:28$40 ($add).
+  creating $alu model for $macc $add$src/puf_id.v:28$40.
+  creating $alu cell for $add$src/puf_id.v:28$40: $auto$alumacc.cc:485:replace_alu$542
+  created 1 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module ro_div:
+  creating $macc model for $add$src/ring_osc.v:25$53 ($add).
+  creating $alu model for $macc $add$src/ring_osc.v:25$53.
+  creating $alu cell for $add$src/ring_osc.v:25$53: $auto$alumacc.cc:485:replace_alu$545
+  created 1 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module silicluster_top:
+  creating $macc model for $add$src/silicluster_top.v:97$75 ($add).
+  creating $alu model for $macc $add$src/silicluster_top.v:97$75.
+  creating $alu model for $ge$src/silicluster_top.v:101$78 ($ge): new $alu
+  creating $alu cell for $ge$src/silicluster_top.v:101$78: $auto$alumacc.cc:485:replace_alu$549
+  creating $alu cell for $add$src/silicluster_top.v:97$75: $auto$alumacc.cc:485:replace_alu$558
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module trng:
+  creating $macc model for $add$src/trng.v:21$88 ($add).
+  creating $macc model for $add$src/trng.v:33$92 ($add).
+  creating $alu model for $macc $add$src/trng.v:33$92.
+  creating $alu model for $macc $add$src/trng.v:21$88.
+  creating $alu cell for $add$src/trng.v:21$88: $auto$alumacc.cc:485:replace_alu$561
+  creating $alu cell for $add$src/trng.v:33$92: $auto$alumacc.cc:485:replace_alu$564
+  created 2 $alu and 0 $macc cells.
+
+8.13. Executing SHARE pass (SAT-based resource sharing).
+
+8.14. Executing OPT pass (performing simple optimizations).
+
+8.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+8.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~2 debug messages>
+
+8.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+8.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.14.16. Finished OPT passes. (There is nothing left to do.)
+
+8.15. Executing MEMORY pass.
+
+8.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+8.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+8.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+8.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+8.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+8.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+8.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+8.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+8.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.17. Executing OPT pass (performing simple optimizations).
+
+8.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+<suppressed ~8 debug messages>
+Optimizing module health_test.
+<suppressed ~4 debug messages>
+Optimizing module puf_id.
+<suppressed ~1 debug messages>
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+<suppressed ~10 debug messages>
+Optimizing module trng.
+<suppressed ~13 debug messages>
+
+8.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+8.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 1 unused cells and 25 unused wires.
+<suppressed ~6 debug messages>
+
+8.17.5. Finished fast OPT passes.
+
+8.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8.19. Executing OPT pass (performing simple optimizations).
+
+8.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+<suppressed ~1 debug messages>
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~15 debug messages>
+
+8.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.19.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $mux $ternary$src/puf_id.v:13$34 in front of them:
+        $xor$src/puf_id.v:13$32
+        $xor$src/puf_id.v:14$33
+
+8.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+8.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+<suppressed ~1 debug messages>
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+8.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.19.14. Executing OPT_SHARE pass.
+
+8.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+8.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \freq_counter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \health_test..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \puf_id..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \ro_div..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \silicluster_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \trng..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+8.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+  Optimizing cells in module \freq_counter.
+  Optimizing cells in module \health_test.
+  Optimizing cells in module \puf_id.
+  Optimizing cells in module \ro_div.
+  Optimizing cells in module \silicluster_top.
+  Optimizing cells in module \trng.
+Performed a total of 0 changes.
+
+8.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 0 cells.
+
+8.19.22. Executing OPT_SHARE pass.
+
+8.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+
+8.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.19.26. Finished OPT passes. (There is nothing left to do.)
+
+8.20. Executing TECHMAP pass (map to technology primitives).
+
+8.20.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+8.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_xor.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod$constmap:1ef046be63c9541309f2f19c4ef998a798f64488$paramod$7fe1424d9d826b3a6286885bc851fafa5143be2b\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$4f9ddb8bcc47f1c63c5307c488aaf2e8cb141a6c\_90_pmux for cells of type $pmux.
+Using template $paramod$83dd457849c736323edf2edb15923eb27f99c683\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$103b4016182df467cceab67bcf3e18e6361ec0fd\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod$c3cd1564c35d873179656addd6052d7ea8b6d991\_90_alu for cells of type $alu.
+Using template $paramod$4bdb94ac02745db6fc41e2e497d9b9793cd51dc6\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_or.
+Using template $paramod$c4905825bb8ecc38b98eb4167e8b007447af7884\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod$3b7577489eb4433b1d5620cab7f3794743dee5ea\_90_alu for cells of type $alu.
+Using template $paramod$2af30114e9bd4ccb04dad757b3f0a8f6bf0615b0\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001111 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1849 debug messages>
+
+8.21. Executing OPT pass (performing simple optimizations).
+
+8.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+<suppressed ~190 debug messages>
+Optimizing module health_test.
+<suppressed ~266 debug messages>
+Optimizing module puf_id.
+<suppressed ~28 debug messages>
+Optimizing module ro_div.
+<suppressed ~35 debug messages>
+Optimizing module silicluster_top.
+<suppressed ~197 debug messages>
+Optimizing module trng.
+<suppressed ~63 debug messages>
+
+8.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+<suppressed ~57 debug messages>
+Finding identical cells in module `\health_test'.
+<suppressed ~87 debug messages>
+Finding identical cells in module `\puf_id'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `\ro_div'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\silicluster_top'.
+<suppressed ~273 debug messages>
+Finding identical cells in module `\trng'.
+<suppressed ~48 debug messages>
+Removed a total of 160 cells.
+
+8.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 77 unused cells and 778 unused wires.
+<suppressed ~83 debug messages>
+
+8.21.5. Finished fast OPT passes.
+
+8.22. Executing ABC pass (technology mapping using ABC).
+
+8.22.1. Extracting gate netlist of module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000' to `<abc-temp-dir>/input.blif'..
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 1 outputs.
+
+8.22.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.1.2. Re-integrating ABC results.
+ABC RESULTS:              XNOR cells:        2
+ABC RESULTS:               XOR cells:        1
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+
+8.22.2. Extracting gate netlist of module `\freq_counter' to `<abc-temp-dir>/input.blif'..
+Extracted 148 gates and 184 wires to a netlist network with 35 inputs and 36 outputs.
+
+8.22.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               NOR cells:        3
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:              NAND cells:       17
+ABC RESULTS:                OR cells:       17
+ABC RESULTS:             ORNOT cells:       11
+ABC RESULTS:               XOR cells:       29
+ABC RESULTS:            ANDNOT cells:       33
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:        internal signals:      113
+ABC RESULTS:           input signals:       35
+ABC RESULTS:          output signals:       36
+Removing temp directory.
+
+8.22.3. Extracting gate netlist of module `\health_test' to `<abc-temp-dir>/input.blif'..
+Extracted 163 gates and 199 wires to a netlist network with 34 inputs and 34 outputs.
+
+8.22.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        4
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:             ORNOT cells:        3
+ABC RESULTS:              XNOR cells:        8
+ABC RESULTS:              NAND cells:       17
+ABC RESULTS:                OR cells:       15
+ABC RESULTS:            ANDNOT cells:       48
+ABC RESULTS:               AND cells:       13
+ABC RESULTS:               XOR cells:       19
+ABC RESULTS:        internal signals:      131
+ABC RESULTS:           input signals:       34
+ABC RESULTS:          output signals:       34
+Removing temp directory.
+
+8.22.4. Extracting gate netlist of module `\puf_id' to `<abc-temp-dir>/input.blif'..
+Extracted 26 gates and 38 wires to a netlist network with 11 inputs and 7 outputs.
+
+8.22.4.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:            ANDNOT cells:        4
+ABC RESULTS:               XOR cells:        5
+ABC RESULTS:        internal signals:       20
+ABC RESULTS:           input signals:       11
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+
+8.22.5. Extracting gate netlist of module `\ro_div' to `<abc-temp-dir>/input.blif'..
+Extracted 14 gates and 21 wires to a netlist network with 7 inputs and 7 outputs.
+
+8.22.5.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.5.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:               XOR cells:        6
+ABC RESULTS:        internal signals:        7
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+
+8.22.6. Extracting gate netlist of module `\silicluster_top' to `<abc-temp-dir>/input.blif'..
+Extracted 333 gates and 462 wires to a netlist network with 128 inputs and 28 outputs.
+
+8.22.6.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.6.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:        2
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        3
+ABC RESULTS:               MUX cells:       10
+ABC RESULTS:             ORNOT cells:       13
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               NOR cells:        4
+ABC RESULTS:              NAND cells:       13
+ABC RESULTS:                OR cells:      107
+ABC RESULTS:            ANDNOT cells:      136
+ABC RESULTS:        internal signals:      306
+ABC RESULTS:           input signals:      128
+ABC RESULTS:          output signals:       28
+Removing temp directory.
+
+8.22.7. Extracting gate netlist of module `\trng' to `<abc-temp-dir>/input.blif'..
+Extracted 66 gates and 86 wires to a netlist network with 19 inputs and 18 outputs.
+
+8.22.7.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+8.22.7.2. Re-integrating ABC results.
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:               NOR cells:        5
+ABC RESULTS:              NAND cells:        6
+ABC RESULTS:                OR cells:        6
+ABC RESULTS:             ORNOT cells:        6
+ABC RESULTS:               NOT cells:        2
+ABC RESULTS:              XNOR cells:        5
+ABC RESULTS:            ANDNOT cells:       15
+ABC RESULTS:               XOR cells:        6
+ABC RESULTS:        internal signals:       49
+ABC RESULTS:           input signals:       19
+ABC RESULTS:          output signals:       18
+Removing temp directory.
+
+8.23. Executing OPT pass (performing simple optimizations).
+
+8.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000.
+Optimizing module freq_counter.
+<suppressed ~3 debug messages>
+Optimizing module health_test.
+Optimizing module puf_id.
+Optimizing module ro_div.
+Optimizing module silicluster_top.
+Optimizing module trng.
+
+8.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000'.
+Finding identical cells in module `\freq_counter'.
+Finding identical cells in module `\health_test'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\puf_id'.
+Finding identical cells in module `\ro_div'.
+Finding identical cells in module `\silicluster_top'.
+Finding identical cells in module `\trng'.
+Removed a total of 2 cells.
+
+8.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000..
+Finding unused cells or wires in module \freq_counter..
+Finding unused cells or wires in module \health_test..
+Finding unused cells or wires in module \puf_id..
+Finding unused cells or wires in module \ro_div..
+Finding unused cells or wires in module \silicluster_top..
+Finding unused cells or wires in module \trng..
+Removed 1 unused cells and 629 unused wires.
+<suppressed ~15 debug messages>
+
+8.23.5. Finished fast OPT passes.
+
+8.24. Executing HIERARCHY pass (managing design hierarchy).
+
+8.24.1. Analyzing design hierarchy..
+Top module:  \silicluster_top
+Used module:     \ro_div
+Used module:     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000
+Used module:     \freq_counter
+Used module:     \health_test
+Used module:     \puf_id
+Used module:     \trng
+
+8.24.2. Analyzing design hierarchy..
+Top module:  \silicluster_top
+Used module:     \ro_div
+Used module:     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000
+Used module:     \freq_counter
+Used module:     \health_test
+Used module:     \puf_id
+Used module:     \trng
+Removed 0 unused modules.
+
+8.25. Printing statistics.
+
+=== $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000 ===
+
+   Number of wires:                  8
+   Number of wire bits:             26
+   Number of public wires:           5
+   Number of public wire bits:      23
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 19
+     $_DFFE_PN0P_                    8
+     $_DFFE_PN1P_                    8
+     $_XNOR_                         2
+     $_XOR_                          1
+
+=== freq_counter ===
+
+   Number of wires:                 97
+   Number of wire bits:            157
+   Number of public wires:           9
+   Number of public wire bits:      40
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                153
+     $_ANDNOT_                      33
+     $_AND_                          2
+     $_DFFE_PN0P_                   32
+     $_DFF_PN0_                      4
+     $_MUX_                          3
+     $_NAND_                        17
+     $_NOR_                          3
+     $_NOT_                          2
+     $_ORNOT_                       11
+     $_OR_                          17
+     $_XOR_                         29
+
+=== health_test ===
+
+   Number of wires:                135
+   Number of wire bits:            185
+   Number of public wires:          13
+   Number of public wire bits:      49
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                161
+     $_ANDNOT_                      48
+     $_AND_                         11
+     $_DFFE_PN0P_                   33
+     $_MUX_                          1
+     $_NAND_                        17
+     $_NOR_                          2
+     $_NOT_                          4
+     $_ORNOT_                        3
+     $_OR_                          15
+     $_XNOR_                         8
+     $_XOR_                         19
+
+=== puf_id ===
+
+   Number of wires:                 27
+   Number of wire bits:             46
+   Number of public wires:          12
+   Number of public wire bits:      31
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 37
+     $_ANDNOT_                       4
+     $_AND_                          3
+     $_DFFE_PN0P_                   19
+     $_DFF_PN0_                      1
+     $_MUX_                          3
+     $_NOR_                          2
+     $_XOR_                          5
+
+=== ro_div ===
+
+   Number of wires:                 13
+   Number of wire bits:             31
+   Number of public wires:           4
+   Number of public wire bits:      10
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 21
+     $_ANDNOT_                       2
+     $_AND_                          3
+     $_DFF_PN0_                      7
+     $_NAND_                         2
+     $_NOT_                          1
+     $_XOR_                          6
+
+=== silicluster_top ===
+
+   Number of wires:                333
+   Number of wire bits:            456
+   Number of public wires:          46
+   Number of public wire bits:     165
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                346
+     $_ANDNOT_                     136
+     $_AND_                          2
+     $_DFFE_PN0P_                   35
+     $_DFF_PN0_                      9
+     $_DFF_PN1_                      2
+     $_MUX_                         10
+     $_NAND_                        13
+     $_NOR_                          4
+     $_NOT_                          2
+     $_ORNOT_                       13
+     $_OR_                         107
+     $_XNOR_                         1
+     $_XOR_                          3
+     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000      1
+     freq_counter                    1
+     health_test                     1
+     puf_id                          1
+     ro_div                          4
+     trng                            1
+
+=== trng ===
+
+   Number of wires:                 63
+   Number of wire bits:            114
+   Number of public wires:          17
+   Number of public wire bits:      58
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 99
+     $_ANDNOT_                      15
+     $_DFFE_PN0P_                   40
+     $_DFF_PN0_                      7
+     $_MUX_                          1
+     $_NAND_                         6
+     $_NOR_                          5
+     $_NOT_                          2
+     $_ORNOT_                        6
+     $_OR_                           6
+     $_XNOR_                         5
+     $_XOR_                          6
+
+=== design hierarchy ===
+
+   silicluster_top                   1
+     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000      1
+     freq_counter                    1
+     health_test                     1
+     puf_id                          1
+     ro_div                          4
+     trng                            1
+
+   Number of wires:                715
+   Number of wire bits:           1108
+   Number of public wires:         118
+   Number of public wire bits:     406
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                890
+     $_ANDNOT_                     244
+     $_AND_                         30
+     $_DFFE_PN0P_                  167
+     $_DFFE_PN1P_                    8
+     $_DFF_PN0_                     49
+     $_DFF_PN1_                      2
+     $_MUX_                         18
+     $_NAND_                        61
+     $_NOR_                         16
+     $_NOT_                         14
+     $_ORNOT_                       33
+     $_OR_                         145
+     $_XNOR_                        16
+     $_XOR_                         87
+
+8.26. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000...
+Checking module freq_counter...
+Checking module health_test...
+Checking module puf_id...
+Checking module ro_div...
+Checking module silicluster_top...
+Checking module trng...
+Found and reported 0 problems.
+
+9. Printing statistics.
+
+=== $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000 ===
+
+   Number of wires:                  8
+   Number of wire bits:             26
+   Number of public wires:           5
+   Number of public wire bits:      23
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 19
+     $_DFFE_PN0P_                    8
+     $_DFFE_PN1P_                    8
+     $_XNOR_                         2
+     $_XOR_                          1
+
+=== freq_counter ===
+
+   Number of wires:                 97
+   Number of wire bits:            157
+   Number of public wires:           9
+   Number of public wire bits:      40
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                153
+     $_ANDNOT_                      33
+     $_AND_                          2
+     $_DFFE_PN0P_                   32
+     $_DFF_PN0_                      4
+     $_MUX_                          3
+     $_NAND_                        17
+     $_NOR_                          3
+     $_NOT_                          2
+     $_ORNOT_                       11
+     $_OR_                          17
+     $_XOR_                         29
+
+=== health_test ===
+
+   Number of wires:                135
+   Number of wire bits:            185
+   Number of public wires:          13
+   Number of public wire bits:      49
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                161
+     $_ANDNOT_                      48
+     $_AND_                         11
+     $_DFFE_PN0P_                   33
+     $_MUX_                          1
+     $_NAND_                        17
+     $_NOR_                          2
+     $_NOT_                          4
+     $_ORNOT_                        3
+     $_OR_                          15
+     $_XNOR_                         8
+     $_XOR_                         19
+
+=== puf_id ===
+
+   Number of wires:                 27
+   Number of wire bits:             46
+   Number of public wires:          12
+   Number of public wire bits:      31
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 37
+     $_ANDNOT_                       4
+     $_AND_                          3
+     $_DFFE_PN0P_                   19
+     $_DFF_PN0_                      1
+     $_MUX_                          3
+     $_NOR_                          2
+     $_XOR_                          5
+
+=== ro_div ===
+
+   Number of wires:                 13
+   Number of wire bits:             31
+   Number of public wires:           4
+   Number of public wire bits:      10
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 21
+     $_ANDNOT_                       2
+     $_AND_                          3
+     $_DFF_PN0_                      7
+     $_NAND_                         2
+     $_NOT_                          1
+     $_XOR_                          6
+
+=== silicluster_top ===
+
+   Number of wires:                333
+   Number of wire bits:            456
+   Number of public wires:          46
+   Number of public wire bits:     165
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                346
+     $_ANDNOT_                     136
+     $_AND_                          2
+     $_DFFE_PN0P_                   35
+     $_DFF_PN0_                      9
+     $_DFF_PN1_                      2
+     $_MUX_                         10
+     $_NAND_                        13
+     $_NOR_                          4
+     $_NOT_                          2
+     $_ORNOT_                       13
+     $_OR_                         107
+     $_XNOR_                         1
+     $_XOR_                          3
+     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000      1
+     freq_counter                    1
+     health_test                     1
+     puf_id                          1
+     ro_div                          4
+     trng                            1
+
+=== trng ===
+
+   Number of wires:                 63
+   Number of wire bits:            114
+   Number of public wires:          17
+   Number of public wire bits:      58
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 99
+     $_ANDNOT_                      15
+     $_DFFE_PN0P_                   40
+     $_DFF_PN0_                      7
+     $_MUX_                          1
+     $_NAND_                         6
+     $_NOR_                          5
+     $_NOT_                          2
+     $_ORNOT_                        6
+     $_OR_                           6
+     $_XNOR_                         5
+     $_XOR_                          6
+
+=== design hierarchy ===
+
+   silicluster_top                   1
+     $paramod\ro_bank\USE_RO=s32'00000000000000000000000000000000      1
+     freq_counter                    1
+     health_test                     1
+     puf_id                          1
+     ro_div                          4
+     trng                            1
+
+   Number of wires:                715
+   Number of wire bits:           1108
+   Number of public wires:         118
+   Number of public wire bits:     406
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                890
+     $_ANDNOT_                     244
+     $_AND_                         30
+     $_DFFE_PN0P_                  167
+     $_DFFE_PN1P_                    8
+     $_DFF_PN0_                     49
+     $_DFF_PN1_                      2
+     $_MUX_                         18
+     $_NAND_                        61
+     $_NOR_                         16
+     $_NOT_                         14
+     $_ORNOT_                       33
+     $_OR_                         145
+     $_XNOR_                        16
+     $_XOR_                         87
+
+End of script. Logfile hash: 4f883e155a, CPU: user 1.01s system 0.08s, MEM: 21.64 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 36% 1x abc (0 sec), 17% 35x opt_expr (0 sec), ...

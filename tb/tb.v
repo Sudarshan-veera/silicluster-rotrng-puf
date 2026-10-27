@@ -23,7 +23,7 @@ module tb;
 
   reg [7:0] r; reg [15:0] cnt; reg [31:0] w; integer k, j;
   initial begin
-    #1000 rst_n = 1; #1000;
+    rst_n = 1; #10 rst_n = 0; #1000 rst_n = 1; #1000;
     spi_xfer(8'h0F, 8'h00, r); $display("ID = %h (expect a6)", r);
 
     spi_xfer(8'h80, 8'h03, r);
@@ -42,11 +42,9 @@ module tb;
     end else $display("TRNG timeout");
 
     spi_xfer(8'h08,8'h00,r); $display("Health fail count = %0d", r);
-    spi_xfer(8'h09,8'h00,r); $display("VN kept = %0d", r);
-    spi_xfer(8'h0A,8'h00,r); $display("VN discarded = %0d", r);
 
     challenge = 2'd1;
-    spi_xfer(8'h8C, 8'h01, r);
+    for (k=0;k<8;k=k+1) spi_xfer(8'h8C, 8'h01, r);
     for (k=0;k<10;k=k+1) spi_xfer(8'h01,8'h00,r);
     spi_xfer(8'h0B,8'h00,r); $display("PUF response = %h", r);
 
