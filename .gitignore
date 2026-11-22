@@ -1,0 +1,11 @@
+# Icarus Verilog build output
+/sim
+*.vvp
+
+# Waveform dumps (regenerate with: vvp sim)
+*.vcd
+
+# Editor and OS files
+*.swp
+.DS_Store
+__pycache__/
